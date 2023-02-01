@@ -1,5 +1,7 @@
 # React Native Simple Picker
 
+## This is a forked version of the simple picker for React Native - This version includes the additional property `useNativeDriver`
+
 A simple picker for React Native.
 
 [![Latest Version](https://badgen.net/npm/v/react-native-simple-picker)](https://www.npmjs.com/package/react-native-simple-picker)
