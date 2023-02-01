@@ -10,9 +10,9 @@ import {
 	Modal,
 	Dimensions,
 	TouchableWithoutFeedback,
-  Animated,
+	Animated,
 	SafeAreaView,
-  Platform,
+	Platform,
 } from 'react-native'; // eslint-disable-line
 
 import { Picker } from '@react-native-picker/picker';
@@ -21,11 +21,11 @@ const SCREEN_WIDTH = Dimensions.get('window').width;
 
 const styles = {
 	overlayContainer: {
-	  zIndex: -1,
-    width: '100%',
-    height: '100%',
-    backgroundColor: '#000',
-    opacity: 0.3,
+		zIndex: -1,
+		width: '100%',
+		height: '100%',
+		backgroundColor: '#000',
+		opacity: 0.3,
 	},
 
 	mainBox: {
@@ -83,7 +83,7 @@ class SimplePicker extends Component {
 		this.state = {
 			modalVisible: props.modalVisible || false,
 			selectedOption: props.options[selected],
-      translateY: new Animated.Value(0),
+			translateY: new Animated.Value(0),
 		};
 
 		this.styles = StyleSheet.create({
@@ -165,17 +165,23 @@ class SimplePicker extends Component {
 		this.setState({
 			modalVisible: true,
 		});
-    Animated.timing(
-      this.state.translateY,
-      { toValue: Platform.OS === 'ios' ? -250 : -85 }
-    ).start();
+		Animated.timing(
+			this.state.translateY,
+			{
+				toValue: Platform.OS === 'ios' ? -250 : -85,
+				useNativeDriver: true,
+			}
+		).start();
 	}
 
 	hide() {
-    Animated.timing(
-      this.state.translateY,
-      { toValue: 0 }
-    ).start(() => this.setState({ modalVisible: false }));
+		Animated.timing(
+			this.state.translateY,
+			{
+				toValue: 0,
+				useNativeDriver: true,
+			}
+		).start(() => this.setState({ modalVisible: false }));
 	}
 
 	renderItem(option, index) {
@@ -203,50 +209,50 @@ class SimplePicker extends Component {
 			disableOverlay,
 		} = this.props;
 
-    const transformStyle = {
-      transform: [{ translateY }]
-    };
+		const transformStyle = {
+			transform: [{ translateY }]
+		};
 
-    return (
-       <Modal
-          transparent={true}
-          visible={modalVisible}
-          onRequestClose={this.onPressCancel}
-          supportedOrientations={['portrait', 'landscape']}
-        >
-          {!disableOverlay &&
-          <TouchableWithoutFeedback onPress={this.onOverlayDismiss}>
-            <View style={this.styles.overlayContainer}/>
-          </TouchableWithoutFeedback>
-          }
-			<SafeAreaView>
-          <Animated.View style={[this.styles.modalContainer, transformStyle]}>
-            <View style={this.styles.buttonView}>
-              <TouchableOpacity onPress={this.onPressCancel}>
-                <Text style={[buttonStyle, cancelTextStyle]}>
-                  {cancelText || 'Cancel'}
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={this.onPressSubmit}>
-                <Text style={[buttonStyle, confirmTextStyle]}>
-                  {confirmText || 'Confirm'}
-                </Text>
-              </TouchableOpacity>
-            </View>
-            <View style={this.styles.mainBox}>
-              <Picker
-                style={this.styles.bottomPicker}
-                selectedValue={selectedOption}
-                onValueChange={this.onValueChange}
-                itemStyle={itemStyle}
-              >
-                {options.map((option, index) => this.renderItem(option, index))}
-              </Picker>
-            </View>
-          </Animated.View>
-		</SafeAreaView>
-        </Modal>
-    );
+		return (
+			<Modal
+				transparent={true}
+				visible={modalVisible}
+				onRequestClose={this.onPressCancel}
+				supportedOrientations={['portrait', 'landscape']}
+			>
+				{!disableOverlay &&
+					<TouchableWithoutFeedback onPress={this.onOverlayDismiss}>
+						<View style={this.styles.overlayContainer} />
+					</TouchableWithoutFeedback>
+				}
+				<SafeAreaView>
+					<Animated.View style={[this.styles.modalContainer, transformStyle]}>
+						<View style={this.styles.buttonView}>
+							<TouchableOpacity onPress={this.onPressCancel}>
+								<Text style={[buttonStyle, cancelTextStyle]}>
+									{cancelText || 'Cancel'}
+								</Text>
+							</TouchableOpacity>
+							<TouchableOpacity onPress={this.onPressSubmit}>
+								<Text style={[buttonStyle, confirmTextStyle]}>
+									{confirmText || 'Confirm'}
+								</Text>
+							</TouchableOpacity>
+						</View>
+						<View style={this.styles.mainBox}>
+							<Picker
+								style={this.styles.bottomPicker}
+								selectedValue={selectedOption}
+								onValueChange={this.onValueChange}
+								itemStyle={itemStyle}
+							>
+								{options.map((option, index) => this.renderItem(option, index))}
+							</Picker>
+						</View>
+					</Animated.View>
+				</SafeAreaView>
+			</Modal>
+		);
 	}
 }
 
