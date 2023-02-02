@@ -8,7 +8,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/puredazzle/react-native-simple-picker.git"
+		"url": "git+https://github.com/domSBM/react-native-simple-picker.git"
 	},
 	"keywords": [
 		"React-Native",
@@ -21,9 +21,9 @@
 		"index.js"
 	],
 	"bugs": {
-		"url": "https://github.com/puredazzle/react-native-simple-picker/issues"
+		"url": "https://github.com/domSBM/react-native-simple-picker/issues"
 	},
-	"homepage": "https://github.com/puredazzle/react-native-simple-picker#readme",
+	"homepage": "https://github.com/domSBM/react-native-simple-picker#readme",
 	"devDependencies": {
 		"babel-eslint": "^8.2.2",
 		"eslint": "^4.19.1",
